@@ -1,6 +1,10 @@
 #Main file of Voice Assistant
-from packages.Va_Functions import VA_func
+#git add .
+#git commit -m "Add new feature"
+#git push origin main
 
+
+from packages.Va_Functions import VA_func
 
 def main():
     va1 = VA_func()
