@@ -57,7 +57,7 @@ def handle_command(command):
         return va1.lock_window()
     elif "shutdown" in command:
         return va1.shut_down()
-    elif "empty bin" in command:
+    elif "recycle bin" in command:
         return va1.empty_bin()
     elif "sleep" in command:
         return va1.sleep()

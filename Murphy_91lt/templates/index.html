@@ -27,6 +27,10 @@
             <span class="light-on"></span>
         </div>
     </div>
+    <footer>
+      <p>&copy; 2024 Voice Assistant. All rights reserved.</p>
+      <p>Developed by <a href="https://github.com/kakeru91lt" target="_blank">Bijay Tamang, Bidhya Devi Baram</a></p>
+    </footer>
     <script>
       document.getElementById('btn').addEventListener('change', function() {
           var isChecked = this.checked;
@@ -71,9 +75,6 @@ document.getElementById('btn').addEventListener('change', function() {
         stopRecording(); // Stop recording when checkbox is unchecked
     }
 });
-
-
-  
       function sendCommandToServer(command) {
           fetch('/submit_command', {
               method: 'POST',
@@ -91,6 +92,5 @@ document.getElementById('btn').addEventListener('change', function() {
           });
       }
   </script>
-  
 </body>
 </html>
