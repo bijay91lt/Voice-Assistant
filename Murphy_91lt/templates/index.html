@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VOICE ASSISTANT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="toggle">
+        <input type="checkbox" id="btn">
+        <label for="btn">
+            <span class="track">
+                <span class="track-top">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </span>
+                <span class="track-bot">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </span>
+            </span>
+            <span class="thumb"></span>
+        </label>
+        <div class="lights">
+            <span class="light-off"></span>
+            <span class="light-on"></span>
+        </div>
+    </div>
+    <script>
+      document.getElementById('btn').addEventListener('change', function() {
+          var isChecked = this.checked;
+          if (isChecked) {
+              recordVoiceCommand();
+          }
+      });
+  
+      // Function to start recording voice commands
+function startRecording() {
+    const recognition = new webkitSpeechRecognition(); // Create a new SpeechRecognition object
+    recognition.lang = 'en-US'; // Set the language to English (United States)
+
+    recognition.onstart = function() {
+        console.log('Recording voice command...');
+    };
+
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript; // Get the transcribed voice command
+        console.log('Voice command recorded:', transcript);
+        sendCommandToServer(transcript); // Call sendCommandToServer() with the recorded command
+    };
+
+    recognition.onerror = function(event) {
+        console.error('Error recording voice command:', event.error);
+    };
+
+    recognition.start(); // Start recording
+}
+
+// Function to stop recording voice commands
+function stopRecording() {
+    recognition.stop(); // Stop recording
+}
+
+// Event listener for checkbox change
+document.getElementById('btn').addEventListener('change', function() {
+    var isChecked = this.checked;
+    if (isChecked) {
+        startRecording(); // Start recording when checkbox is checked
+    } else {
+        stopRecording(); // Stop recording when checkbox is unchecked
+    }
+});
+
+
+  
+      function sendCommandToServer(command) {
+          fetch('/submit_command', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ command: command }),
+          })
+          .then(response => response.text())
+          .then(data => {
+              console.log('Response:', data);
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+      }
+  </script>
+  
+</body>
+</html>
