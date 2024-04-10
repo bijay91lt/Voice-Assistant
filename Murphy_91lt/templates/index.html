@@ -27,70 +27,14 @@
             <span class="light-on"></span>
         </div>
     </div>
+    <div class="outputs-text">
+        <!-- Content with the outputs text class -->
+        <p id="output-text">This is a sample text with the outputs text class.</p>
+    </div>
     <footer>
       <p>&copy; 2024 Voice Assistant. All rights reserved.</p>
       <p>Developed by <a href="https://github.com/kakeru91lt" target="_blank">Bijay Tamang, Bidhya Devi Baram</a></p>
     </footer>
-    <script>
-      document.getElementById('btn').addEventListener('change', function() {
-          var isChecked = this.checked;
-          if (isChecked) {
-              recordVoiceCommand();
-          }
-      });
-  
-      // Function to start recording voice commands
-function startRecording() {
-    const recognition = new webkitSpeechRecognition(); // Create a new SpeechRecognition object
-    recognition.lang = 'en-US'; // Set the language to English (United States)
-
-    recognition.onstart = function() {
-        console.log('Recording voice command...');
-    };
-
-    recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript; // Get the transcribed voice command
-        console.log('Voice command recorded:', transcript);
-        sendCommandToServer(transcript); // Call sendCommandToServer() with the recorded command
-    };
-
-    recognition.onerror = function(event) {
-        console.error('Error recording voice command:', event.error);
-    };
-
-    recognition.start(); // Start recording
-}
-
-// Function to stop recording voice commands
-function stopRecording() {
-    recognition.stop(); // Stop recording
-}
-
-// Event listener for checkbox change
-document.getElementById('btn').addEventListener('change', function() {
-    var isChecked = this.checked;
-    if (isChecked) {
-        startRecording(); // Start recording when checkbox is checked
-    } else {
-        stopRecording(); // Stop recording when checkbox is unchecked
-    }
-});
-      function sendCommandToServer(command) {
-          fetch('/submit_command', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ command: command }),
-          })
-          .then(response => response.text())
-          .then(data => {
-              console.log('Response:', data);
-          })
-          .catch(error => {
-              console.error('Error:', error);
-          });
-      }
-  </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

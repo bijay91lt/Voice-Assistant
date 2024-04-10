@@ -51,21 +51,15 @@ class VA_func:
     def wish_me():
         hour = datetime.datetime.now().hour
         if 0 <= hour < 12:
-            VA_func.speak("Good Morning !")
-            print('Good Morning')
+            VA_func.speak("Good Morning. I am your Voice Assistant. How may I help you ?")
+            result ="Good Morning. I am your Voice Assistant. How may I help you ?"
         elif 12 <= hour < 18:
-            VA_func.speak("Good Afternoon !")
-            print('Good Afternoon')
+            VA_func.speak("Good Afternoon. I am your Voice Assistant. How may I help you ?")
+            result = "Good Afternoon. I am your Voice Assistant. How may I help you ?"
         else:
-            VA_func.speak("Good Evening !")
-            print('Good Evening')
-
-        asst_name = "Murph"
-        VA_func.speak("I am your Voice Assistant")
-        print('I am your Voice Assistant')
-        VA_func.speak(asst_name)
-        VA_func.speak("How may I help you ?")
-        print('How may I help you ?')
+            VA_func.speak("Good Evening.I am your Voice Assistant. How may I help you ?")
+            result = "Good Evening. I am your Voice Assistant. How may I help you ?"
+        return result
 
     @staticmethod
     def search_wikipedia(query):
@@ -73,18 +67,20 @@ class VA_func:
         query = query.replace("wikipedia", "")
         results = wikipedia.summary(query, sentences=2)
         VA_func.speak("According to Wikipedia")
-        print(results)
         VA_func.speak(results)
+        return results
 
     @staticmethod
     def search_google(query):
         VA_func.speak("Here's what I found on Google.")
         webbrowser.open(f"https://www.google.com/search?q={query}")
+        return "Displaying Google Results..."
 
     @staticmethod
     def search_youtube(query):
         VA_func.speak("I will bring that up on youtube for you.")
         pywhatkit.playonyt(query)
+        return "Playing Youtube Video..."
 
     @staticmethod
     def play_music():
@@ -92,32 +88,31 @@ class VA_func:
         songs = os.listdir(music_dir)
         print(songs) 
         os.startfile(os.path.join(music_dir, songs[1]))
+        return "Playing Music..."
 
     @staticmethod
     def time_now():
         str_time = datetime.datetime.now().strftime("%H:%M:%S")
         VA_func.speak(f"Sir, the time is {str_time}")
+        return "The time is " + str_time
 
     @staticmethod
     def time_and_date():
         current_date = datetime.datetime.now().strftime("%Y-%m-%d")
         VA_func.speak(f"Sir, the date is {current_date}")
+        return "The date is " + current_date
 
     @staticmethod
     def open_notepad():
         code_path = r"C:\Users\Kaker\OneDrive\Desktop\Kakeru\Github\Voice-Assistant\Murphy_91lt\packages\Notepad.txt"
         os.startfile(code_path)
-
-    @staticmethod
-    def exit_assistant():
-        VA_func.speak("Murph, Signing off")
-        quit()
+        return "Notepad Opened"
 
     @staticmethod
     def tell_joke():
         joke = pyjokes.get_joke()
-        print(joke)
         VA_func.speak(joke)
+        return joke
 
     @staticmethod
     def change_bg():
@@ -131,6 +126,7 @@ class VA_func:
 
         ctypes.windll.user32.SystemParametersInfoW(20, 0, random_image, 3)
         VA_func.speak("Background changed successfully")
+        return "Background Changed Successfully..."
 
     @staticmethod
     def news():
@@ -151,26 +147,32 @@ class VA_func:
 
         except Exception as e:
             print(str(e))
+        
+        return "Playing News..."
 
     @staticmethod
     def lock_window():
         VA_func.speak("Locking the device")
         ctypes.windll.user32.LockWorkStation()
+        return None
 
     @staticmethod
     def shut_down():
         VA_func.speak("Hold On a Sec! Your system is on its way to shut down")
         subprocess.call('shutdown /p /f')
+        return None
 
     @staticmethod
     def empty_bin():
         winshell.recycle_bin().empty(confirm=False, show_progress=False, sound=True)
-        VA_func.speak("Recycle Bin Recycled")
+        VA_func.speak("Recycle Bin emptied")
+        return "Recycle Bin emptied..."
 
     @staticmethod
     def sleep():
         VA_func.speak("For how much time do you want to stop Murph from listening to commands?")
         time.sleep(int(VA_func.take_command()))
+        return "Sleeping..."
 
     @staticmethod
     def locate(query):
@@ -179,6 +181,7 @@ class VA_func:
         VA_func.speak("User asked to locate")
         VA_func.speak(location)
         webbrowser.open(f"https://www.google.com/maps/place/{location}")
+        return "Location Found..."
 
     @staticmethod
     def camera():
@@ -189,18 +192,20 @@ class VA_func:
         camera_thread = threading.Thread(target=capture_image)
         camera_thread.start()
         camera_thread.join()
-        
+        return None
         
 
     @staticmethod
     def restart():
         subprocess.call(["shutdown", "/r"])
+        return None
 
     @staticmethod
     def logout():
         VA_func.speak("Make sure all the application are closed before sign-out")
         time.sleep(5)
         subprocess.call(["shutdown", "/l"])
+        return None
 
     @staticmethod
     def write_note():
@@ -209,6 +214,7 @@ class VA_func:
         file = open(r'packages\Murph_notes.txt', 'w')
         strTime = datetime.datetime.now().strftime("%H:%M:%S") 
         file.write(f"{strTime} :- {note}")
+        return "Writing Note..."
     
     @staticmethod
     def show_note():
@@ -216,6 +222,7 @@ class VA_func:
         file = open(r"packages\Murph_notes.txt", "r") 
         print(file.read())
         VA_func.speak(file.read(6))
+        return "Showing Notes..."
 
     @staticmethod
     def get_weather():
@@ -235,6 +242,8 @@ class VA_func:
             VA_func.speak(data[0])  # Return the first result (current conditions)
         except requests.exceptions.RequestException as e:
             VA_func("Error:", e)
+        
+        return None
 
     @staticmethod
     def voice_translation():
@@ -303,8 +312,6 @@ class VA_func:
         input_sentence = input_text
         translation = get_translation(input_sentence, dataset)
 
-        print(translation)
-
         # Use gTTS to convert the translated text into speech
         tts = gTTS(translation, lang)
 
@@ -320,3 +327,5 @@ class VA_func:
         # Wait for the audio to finish playing
         while pygame.mixer.music.get_busy():
             time.sleep(0.1)
+
+        return translation
