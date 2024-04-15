@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form | Voice Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='registration.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<style>
+    body {
+        background: url("{{ url_for('static', filename='bg.jpg') }}") no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+</style>
+<div class="wrapper">
+    <form id="registrationForm" method="POST" action="/register">
+        <h1>Voice Assistant</h1>
+        <h2>Register</h2>
+        <div class="input-box">
+            <input type="text" name="username" id="username" placeholder="Username" required>
+            <i class='bx bx-user'></i>
+        </div>
+        <div class="input-box">
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <i class='bx bx-lock'></i>
+        </div>
+        <button type="submit" class="btn">Register</button>
+    </form>
+</div>
+<footer>
+    <p>&copy; 2024 Voice Assistant. All rights reserved.</p>
+    <p>Developed by <a href="https://github.com/kakeru91lt" target="_blank">Bijay Tamang, Bidhya Devi Baram</a></p>
+</footer>
+</body>
+</html>

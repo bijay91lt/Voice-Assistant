@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset ="UTF-8">
+        <meta name="viewport" content ="width=device-width, initial-scale=1.0">
+        <title>Login Form | Voice Assistant</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- Include jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Include register.js -->
+        <script src="{{ url_for('static', filename='login.js') }}"></script>
+
+    </head>
+    <body>
+        <style>
+            body {
+                background: url("{{ url_for('static', filename='bg.jpg') }}") no-repeat;
+                background-size: cover;
+                background-position: center;
+            }
+        </style>
+        <div class="wrapper">
+            <form action="">
+                <h1>Voice Assistant</h1>
+                <h2>Login</h2>
+                <div class="input-box">
+                    <input type="text" placeholder="Username" required>
+                    <i class='bx bx-user'></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" required>
+                    <i class='bx bx-lock'></i>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="#">Forgot Password</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="register-link">
+                    <p>Don't have an account? <a href="{{ url_for('registration') }}">Register</a></p>
+                </div>
+            </form>
+        </div>
+        <footer>
+            <p>&copy; 2024 Voice Assistant. All rights reserved.</p>
+            <p>Developed by <a href="https://github.com/kakeru91lt" target="_blank">Bijay Tamang, Bidhya Devi Baram</a></p>
+          </footer>
+    </body>
+</html>
