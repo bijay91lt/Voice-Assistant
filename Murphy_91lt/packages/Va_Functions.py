@@ -48,18 +48,18 @@ class VA_func:
             return ""
 
     @staticmethod
-    def wish_me():
+    def wish_me(username):
         hour = datetime.datetime.now().hour
         if 0 <= hour < 12:
-            VA_func.speak("Good Morning. I am your Voice Assistant. How may I help you ?")
-            result ="Good Morning. I am your Voice Assistant. How may I help you ?"
+            message = f"Good Morning, {username}. I am your Voice Assistant. How may I help you?"
         elif 12 <= hour < 18:
-            VA_func.speak("Good Afternoon. I am your Voice Assistant. How may I help you ?")
-            result = "Good Afternoon. I am your Voice Assistant. How may I help you ?"
+            message = f"Good Afternoon, {username}. I am your Voice Assistant. How may I help you?"
         else:
-            VA_func.speak("Good Evening.I am your Voice Assistant. How may I help you ?")
-            result = "Good Evening. I am your Voice Assistant. How may I help you ?"
-        return result
+            message = f"Good Evening, {username}. I am your Voice Assistant. How may I help you?"
+        
+        VA_func.speak(message)  # Assuming you have a speak() method in your VA_func class
+        return message
+
 
     @staticmethod
     def search_wikipedia(query):

@@ -10,7 +10,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to right, #1d0332, #412080);
 }
 
 .wrapper {
@@ -25,7 +24,6 @@ body {
     font-size: 4vw;
     text-align: center;
 }
-
 .wrapper h2 {
     font-size: 30px;
     text-align: center;
@@ -61,6 +59,7 @@ body {
     top: 30%;
     transform: translate(-50%);
     font-size: 20px;
+    color:#fff;
 }
 
 .wrapper .remember-forgot {
@@ -114,22 +113,21 @@ body {
 .wrapper .register-link p a:hover {
     text-decoration: underline;
 }
-
-footer {
+footer{  
     text-align: center;
     color: #fff;
     font-family: "Poppins", sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 10px;
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 999;
-}
+    }
 
 footer a {
-    color: #e3dfe6;
-    text-decoration: underline;
+    color:#88858a ; /* Set the link color to blue */
+    text-decoration: underline; /* Underline the link */
     cursor: pointer;
-}
+    }
