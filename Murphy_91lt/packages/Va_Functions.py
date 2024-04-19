@@ -180,21 +180,15 @@ class VA_func:
         location = query
         VA_func.speak("User asked to locate")
         VA_func.speak(location)
-        webbrowser.open(f"https://www.google.com/maps/place/{location}")
+        webbrowser.open(f"https://www.google.com/maps/search/?api=1&query={location}")
         return "Location Found..."
 
     @staticmethod
     def camera():
         def capture_image():
             ec.capture(0, "Murph Camera ", "img.jpg")
-        
-        # Create a thread to execute the capture_image function
-        camera_thread = threading.Thread(target=capture_image)
-        camera_thread.start()
-        camera_thread.join()
         return None
         
-
     @staticmethod
     def restart():
         subprocess.call(["shutdown", "/r"])
